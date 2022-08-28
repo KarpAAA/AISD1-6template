@@ -4,6 +4,7 @@ package Program;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ScreenClass {
@@ -65,10 +66,14 @@ public class ScreenClass {
         buttonSortAscending.setSize(new Dimension(200,150));
         buttonSortAscending.addActionListener(e -> {
 
-            SortingClass.variantTask(100,100);
-            SortingClass.measuringTime();
-            SortingClass.sortingArrayByStepsTest(arrayList);
-            SortingClass.sortAscending(arrayList);
+            Task4 task = new Task4();
+            task.variantTask();
+            try {
+                task.sorting(arrayList, SortingClass.SortingFacilities.ASCENDING, SortingClass.PrintFile.YES);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            task.timeMeasuring();
             labelArray.setText(arrayList.toString());
 
         });
@@ -77,7 +82,11 @@ public class ScreenClass {
         buttonSortDescending.setSize(new Dimension(200,150));
         buttonSortDescending.addActionListener(e -> {
 
-            SortingClass.sortDescending(arrayList);
+            try {
+                SortingClass.sortBubble(arrayList,SortingClass.SortingFacilities.DESCENDING, SortingClass.PrintFile.NO);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             labelArray.setText(arrayList.toString());
         });
 
