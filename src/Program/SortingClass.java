@@ -47,6 +47,41 @@ public class SortingClass {
 
     }
 
+    public static void sortSecond(ArrayList<Integer> list, SortingFacilities method, PrintFile printNecessary) throws IOException {
+        FileWriter file = null;
+        if (printNecessary == PrintFile.YES) {
+            file = new FileWriter("StepByStepPrinting.txt");
+        }
+
+        for(int i =0;i<list.size();++i){
+            int minMax = list.get(i);
+            int minMaxIndex = i;
+            for(int j =i;j<list.size();++j){
+                if(method == SortingClass.SortingFacilities.ASCENDING){
+                    if(minMax>list.get(j)){
+                        minMax = list.get(j);
+                        minMaxIndex = j;
+                    }
+                }
+                else if(method == SortingClass.SortingFacilities.DESCENDING){
+                    if(minMax<list.get(j)){
+                        minMax = list.get(j);
+                        minMaxIndex = j;
+                    }
+                }
+
+            }
+            int temp = list.get(i);
+            list.set(i,minMax);
+            list.set(minMaxIndex,temp);
+            if (file != null) file.append(list.toString() + "\n");
+        }
+
+        if (file != null) file.close();
+
+    }
+
+
 
 
 }

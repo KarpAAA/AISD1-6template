@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Task4 implements Task {
     @Override
-    public void variantTask() {
+    public void variantTask(ArrayList<Integer> arrayList) {
         int a = 100;
         int b = 100;
         int[][] array = new int[a][b];
