@@ -66,7 +66,7 @@ public class Task4 implements Task {
             for (int i = 0; i < array.length; ++i) {
                 array[i] = random.ints(50, 10, 100000).toArray();
             }
-            Long timeStart = System.nanoTime();
+            long timeStart = System.nanoTime();
 
             for (int j = 0; j < array.length; ++j) {
                 boolean flagStop = false;
@@ -84,7 +84,7 @@ public class Task4 implements Task {
                 }
                 file.append(AdditionalUtilities.showOneArray(array[j]));
             }
-            Long timeSpent = System.nanoTime() - timeStart;
+            long timeSpent = System.nanoTime() - timeStart;
             file.append("\n\n\n\n" + timeSpent / (1e+9) + "\n\n\n\n");
             file.close();
         } catch (IOException e) {
