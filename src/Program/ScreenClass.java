@@ -66,7 +66,7 @@ public class ScreenClass {
         buttonSortAscending.setSize(new Dimension(200,150));
         buttonSortAscending.addActionListener(e -> {
 
-            Task5 task = new Task5();
+            Task6 task = new Task6();
             task.variantTask(arrayList);
             try {
                 task.sorting(arrayList, SortingClass.SortingFacilities.ASCENDING, SortingClass.PrintFile.YES);

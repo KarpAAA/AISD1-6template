@@ -49,7 +49,7 @@ public class Task5 implements Task{
 
     @Override
     public void sorting(ArrayList<Integer> list, SortingClass.SortingFacilities method, SortingClass.PrintFile printNecessary) throws IOException {
-        SortingClass.sortSecond(list,method,printNecessary);
+        SortingClass.sortChosing(list,method,printNecessary);
     }
 
     @Override
