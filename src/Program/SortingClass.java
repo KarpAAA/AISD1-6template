@@ -6,6 +6,14 @@ import java.util.ArrayList;
 
 public class SortingClass {
 
+    enum SortingFacilities {
+        ASCENDING, DESCENDING
+    }
+
+    enum PrintFile {
+        YES, NO
+    }
+
     public static void sortShell(ArrayList<Integer> array, SortingFacilities method, PrintFile printNecessary) throws IOException {
         FileWriter file = null;
         if (printNecessary == PrintFile.YES) {
@@ -17,11 +25,21 @@ public class SortingClass {
         for (int h = N / 2; h >= 1; h /= 2) {
             for (int i = 0; i < N; ++i) {
                 if (N > i + h) {
-                    if (array.get(i) > array.get(i + h)) {
-                        int temp = array.get(i);
-                        array.set(i, array.get(i + h));
-                        array.set(i + h, temp);
-                        ifSwapWas = true;
+
+                    if (method == SortingFacilities.ASCENDING) {
+                        if (array.get(i) > array.get(i + h)) {
+                            int temp = array.get(i);
+                            array.set(i, array.get(i + h));
+                            array.set(i + h, temp);
+                            ifSwapWas = true;
+                        }
+                    } else {
+                        if (array.get(i) < array.get(i + h)) {
+                            int temp = array.get(i);
+                            array.set(i, array.get(i + h));
+                            array.set(i + h, temp);
+                            ifSwapWas = true;
+                        }
                     }
                 }
 
@@ -29,17 +47,25 @@ public class SortingClass {
                     for (int j = i; j >= 0; --j) {
                         if (j - h < 0) break;
                         else {
-                            if (array.get(j) < array.get(j - h)) {
-                                int temp = array.get(j);
-                                array.set(j, array.get(j - h));
-                                array.set(j - h, temp);
+
+                            if (method == SortingFacilities.ASCENDING) {
+                                if (array.get(j) < array.get(j - h)) {
+                                    int temp = array.get(j);
+                                    array.set(j, array.get(j - h));
+                                    array.set(j - h, temp);
+                                }
+                            } else {
+                                if (array.get(j) > array.get(j - h)) {
+                                    int temp = array.get(j);
+                                    array.set(j, array.get(j - h));
+                                    array.set(j - h, temp);
+                                }
                             }
                         }
                     }
                     ifSwapWas = false;
-                }
-                else{
-                    if(N <= i + h) break;
+                } else {
+                    if (N <= i + h) break;
                 }
                 if (printNecessary == PrintFile.YES) file.append(array.toString() + "\n");
             }
@@ -47,14 +73,6 @@ public class SortingClass {
 
 
         if (file != null) file.close();
-    }
-
-    enum SortingFacilities {
-        ASCENDING, DESCENDING
-    }
-
-    enum PrintFile {
-        YES, NO
     }
 
     public static void sortBubble(ArrayList<Integer> array, SortingFacilities method, PrintFile printNecessary) throws IOException {
@@ -120,6 +138,51 @@ public class SortingClass {
 
         if (file != null) file.close();
 
+    }
+
+    public static void quickSort(ArrayList<Integer> list, SortingFacilities method, PrintFile printNecessary) throws IOException {
+        FileWriter file = new FileWriter("StepByStepPrinting.txt");
+        file.close();
+        quickSortRealization(list, 0, list.size() - 1,printNecessary);
+    }
+    private static void quickSortRealization(ArrayList<Integer> list, int from, int to, PrintFile printNecessary) throws IOException {
+
+        if (from < to) {
+            int dividingIndex = division(list, from, to,printNecessary);
+
+            quickSortRealization(list, from, dividingIndex - 1,printNecessary);
+            quickSortRealization(list, dividingIndex, to,printNecessary);
+        }
+    }
+    private static int division(ArrayList<Integer> list, int from, int to, PrintFile printNecessary) throws IOException {
+        FileWriter file = null;
+        if (printNecessary == PrintFile.YES) {
+            file = new FileWriter("StepByStepPrinting.txt",true);
+        }
+        int leftIndex = from;
+        int rightIndex = to;
+
+        int beginningElement = from;
+
+        while (leftIndex <= rightIndex) {
+
+            while (list.get(beginningElement)>list.get(leftIndex))leftIndex++;
+
+            while (list.get(beginningElement)<list.get(rightIndex))rightIndex--;
+
+            if(leftIndex<=rightIndex){
+                int temp = list.get(leftIndex);
+                list.set(leftIndex,list.get(rightIndex));
+                list.set(rightIndex,temp);
+
+                leftIndex++;
+                rightIndex--;
+                file.append(list.toString()+"\n");
+            }
+
+        }
+        if (file != null) file.close();
+        return leftIndex;
     }
 
 

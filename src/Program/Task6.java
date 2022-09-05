@@ -78,7 +78,6 @@ public class Task6 implements Task{
                                         int temp = array[k][j];
                                         array[k][j] = array[k][j - h];
                                         array[k][j - h] = temp;
-                                        ifSwapWas = true;
                                     }
                                 }
                             }

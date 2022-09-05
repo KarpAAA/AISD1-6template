@@ -18,10 +18,8 @@ public class Main {
          arrayList.add(2);
          arrayList.add(54);
          arrayList.add(33);
-        try {
-            SortingClass.sortShell(arrayList, SortingClass.SortingFacilities.ASCENDING, SortingClass.PrintFile.YES);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
+
+         SortingClass.quickSort(arrayList, SortingClass.SortingFacilities.DESCENDING, SortingClass.PrintFile.YES);*/
+
     }
 }
