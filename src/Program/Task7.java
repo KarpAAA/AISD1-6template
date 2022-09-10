@@ -45,17 +45,9 @@ public class Task7 implements Task {
 
             //Sorting bt task
 
-            int[] minElementsArr = new int[array.length];
-            int k = 0;
-            for (int i = 0; i < array.length; ++i) {
-                int min = array[i][0];
-                for (int j = 0; j < array[i].length; ++j) {
-                    if (min > array[j][0]) min = array[j][0];
-                }
-                minElementsArr[k++] = min;
-            }
 
-            sortingColumns(array,minElementsArr,0,minElementsArr.length-1);
+
+            sortingColumns(array,0,array.length-1);
 
             //Printing sorted by task matrix
             file.append("\n\n\n\n\n\nSorted\n");
@@ -111,7 +103,7 @@ public class Task7 implements Task {
 
     }
 
-    private static void sortingColumns(int[][] array, int[] minArr, int from, int to) {
+    private static void sortingColumns(int[][] array, int from, int to) {
         if (from < to) {
             int leftIndex = from;
             int rightIndex = to;
@@ -136,8 +128,8 @@ public class Task7 implements Task {
             }
             int dividingIndex = leftIndex;
 
-            sortingColumns(array,minArr, from, dividingIndex - 1);
-            sortingColumns(array,minArr, dividingIndex, to);
+            sortingColumns(array, from, dividingIndex - 1);
+            sortingColumns(array, dividingIndex, to);
         }
     }
 
@@ -178,4 +170,5 @@ public class Task7 implements Task {
 
         return leftIndex;
     }
+
 }
