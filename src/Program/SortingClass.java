@@ -2,7 +2,10 @@ package Program;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 public class SortingClass {
 
@@ -143,21 +146,23 @@ public class SortingClass {
     public static void quickSort(ArrayList<Integer> list, SortingFacilities method, PrintFile printNecessary) throws IOException {
         FileWriter file = new FileWriter("StepByStepPrinting.txt");
         file.close();
-        quickSortRealization(list, 0, list.size() - 1,printNecessary);
+        quickSortRealization(list, 0, list.size() - 1, printNecessary);
     }
+
     private static void quickSortRealization(ArrayList<Integer> list, int from, int to, PrintFile printNecessary) throws IOException {
 
         if (from < to) {
-            int dividingIndex = division(list, from, to,printNecessary);
+            int dividingIndex = division(list, from, to, printNecessary);
 
-            quickSortRealization(list, from, dividingIndex - 1,printNecessary);
-            quickSortRealization(list, dividingIndex, to,printNecessary);
+            quickSortRealization(list, from, dividingIndex - 1, printNecessary);
+            quickSortRealization(list, dividingIndex, to, printNecessary);
         }
     }
+
     private static int division(ArrayList<Integer> list, int from, int to, PrintFile printNecessary) throws IOException {
         FileWriter file = null;
         if (printNecessary == PrintFile.YES) {
-            file = new FileWriter("StepByStepPrinting.txt",true);
+            file = new FileWriter("StepByStepPrinting.txt", true);
         }
         int leftIndex = from;
         int rightIndex = to;
@@ -166,23 +171,66 @@ public class SortingClass {
 
         while (leftIndex <= rightIndex) {
 
-            while (list.get(beginningElement)>list.get(leftIndex))leftIndex++;
+            while (list.get(beginningElement) > list.get(leftIndex)) leftIndex++;
 
-            while (list.get(beginningElement)<list.get(rightIndex))rightIndex--;
+            while (list.get(beginningElement) < list.get(rightIndex)) rightIndex--;
 
-            if(leftIndex<=rightIndex){
+            if (leftIndex <= rightIndex) {
                 int temp = list.get(leftIndex);
-                list.set(leftIndex,list.get(rightIndex));
-                list.set(rightIndex,temp);
+                list.set(leftIndex, list.get(rightIndex));
+                list.set(rightIndex, temp);
 
                 leftIndex++;
                 rightIndex--;
-                file.append(list.toString()+"\n");
+                file.append(list.toString() + "\n");
             }
 
         }
         if (file != null) file.close();
         return leftIndex;
+    }
+
+    public static void mergeSort(ArrayList<Integer> array, int n) {
+
+        if (n < 2) return;
+        int middleIndex = n / 2;
+
+        ArrayList<Integer> leftArray = new ArrayList<Integer>();
+        ArrayList<Integer> rightArray = new ArrayList<Integer>();
+
+
+        for (int i = 0; i < middleIndex; i++) {
+            leftArray.add(array.get(i));
+        }
+        for (int i = middleIndex; i < n; i++) {
+            rightArray.add(array.get(i));
+        }
+
+        mergeSort(leftArray, middleIndex);
+        mergeSort(rightArray, n - middleIndex);
+
+        merge(leftArray, rightArray, array, middleIndex, n - middleIndex);
+
+    }
+
+    private static void merge(ArrayList<Integer> leftArray, ArrayList<Integer> rightArray, ArrayList<Integer> array, int leftSize, int rightSize) {
+
+        int i = 0, j = 0, k = 0;
+
+        while (i < leftSize && j < rightSize) {
+            if (leftArray.get(i) <= rightArray.get(j)) {
+                array.set(k++, leftArray.get(i++));
+            } else {
+                array.set(k++, rightArray.get(j++));
+            }
+        }
+        while (i < leftSize) {
+            array.set(k++, leftArray.get(i++));
+        }
+        while (j < rightSize) {
+            array.set(k++, rightArray.get(j++));
+        }
+
     }
 
 
