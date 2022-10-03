@@ -148,7 +148,6 @@ public class SortingClass {
         file.close();
         quickSortRealization(list, 0, list.size() - 1, printNecessary);
     }
-
     private static void quickSortRealization(ArrayList<Integer> list, int from, int to, PrintFile printNecessary) throws IOException {
 
         if (from < to) {
@@ -158,7 +157,6 @@ public class SortingClass {
             quickSortRealization(list, dividingIndex, to, printNecessary);
         }
     }
-
     private static int division(ArrayList<Integer> list, int from, int to, PrintFile printNecessary) throws IOException {
         FileWriter file = null;
         if (printNecessary == PrintFile.YES) {
@@ -212,7 +210,6 @@ public class SortingClass {
         merge(leftArray, rightArray, array, middleIndex, n - middleIndex);
 
     }
-
     private static void merge(ArrayList<Integer> leftArray, ArrayList<Integer> rightArray, ArrayList<Integer> array, int leftSize, int rightSize) {
 
         int i = 0, j = 0, k = 0;
@@ -233,5 +230,24 @@ public class SortingClass {
 
     }
 
+
+    public static void countingSort(ArrayList<Integer> array, int min, int max) {
+
+
+        int[] count = new int[max - min + 1];
+
+        for (int i = 0; i < array.size(); i++) {
+            count[array.get(i) - min]++;
+        }
+        int index = 0;
+
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                array.set(index++, i + min);
+            }
+        }
+
+
+    }
 
 }

@@ -25,9 +25,7 @@ public class Main {
          arrayList.add(1);
          arrayList.add(2);
          arrayList.add(54);
-         arrayList.add(33);
-
-         SortingClass.mergeSort(arrayList, arrayList.size());*/
+         arrayList.add(33);*/
 
     }
 }
